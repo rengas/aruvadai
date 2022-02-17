@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"net/http"
+)
 
 func main() {
-	fmt.Println("Aruvadai Arambam")
+	http.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
+		rw.Write([]byte("Aruvadai Arambam"))
+	})
+	
+	http.ListenAndServe(":8080", nil)
 }
