@@ -11,9 +11,9 @@ An e-commerce site for farmers to sell their produce direct to consumers and byp
 #### [4. git அறிமுகம்](chapters/4.git_introduction.md)
 
 ## Intermediate
-#### [5.மின் வர்த்தகம் அறிமுகம்](chapters/5.e-commerce_introduction.md)
-#### [6.கோலங்கு templates](chapters/6.golang_templates.md)
-#### [7.Bootstrap அறிமுகம்](chapters/7.bootstrap_introduction.md)
+#### [5.மின் வர்த்தகம் அறிமுகம்](chapters/5.e-commerce_introduction.md) go-fiber introduction
+#### [6.Bootstrap அறிமுகம்](chapters/7.bootstrap_introduction.md)
+#### [7.கோலங்கு templates](chapters/6.golang_templates.md)
 #### [8.Products on sale](chapters/8.products_on_sale.md)
 #### [9.Postgres Introduction](chapters/9.postgres_introduction.md)
 #### [10.Get products from database](chapters/10.get_products_from_database.md)

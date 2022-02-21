@@ -1,19 +1,41 @@
 package main
 
 import (
-	"net/http"
+	"log"
+
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/template/html"
 )
 
 func main() {
-	http.HandleFunc("/", func(rw http.ResponseWriter, r *http.Request) {
-		keys, ok := r.URL.Query()["item"]
 
-		if !ok || len(keys[0]) < 0 {
-			rw.Write([]byte("Aruvadai Arambam"))
-			return
-		}
-		rw.Write([]byte(keys[0]))
+	// Initialize standard Go html template engine
+	engine := html.New("./views", ".html")
+
+	app := fiber.New(fiber.Config{
+		Views: engine,
 	})
 
-	http.ListenAndServe(":8080", nil)
+	app.Get("/", func(c *fiber.Ctx) error {
+		// Render index template
+		return c.Render("index", fiber.Map{
+			"Title": "அறுவடை ...",
+		})
+	})
+
+	app.Get("/cart", func(c *fiber.Ctx) error {
+		// Render index template
+		return c.Render("index", fiber.Map{
+			"Title": "அறுவடை ...",
+		})
+	})
+
+	app.Get("/order", func(c *fiber.Ctx) error {
+		return c.Render("index", fiber.Map{
+			"Title": "அறுவடை ...",
+		})
+	})
+
+	log.Fatal(app.Listen(":3000"))
+
 }
