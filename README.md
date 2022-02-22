@@ -31,3 +31,4 @@ An e-commerce site for farmers to sell their produce direct to consumers and byp
 #### [Admin prod management](chapters/intermediate/admin_prod_management.md)
 #### [Payment Gateway introduction](chapters/intermediate/payment_gateway_introduction.md)
 #### [Integrate payment gateway](chapters/intermediate/integrate_payment_gateway.md)
+#### [Storing credentials securely]

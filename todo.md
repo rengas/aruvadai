@@ -1,11 +1,13 @@
 Tools installation
 
-air
+## air
 https://github.com/cosmtrek/air
 
-better toml
+## better toml
 For reading toml files correctly
 
+## go migrate cli
 
+ go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@v4.15.1
 
-A simple script to read Readme.md and create files accordingly
+## make install in golang
