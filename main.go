@@ -6,6 +6,9 @@ import (
 
 	"database/sql"
 
+	"github.com/jmoiron/sqlx"
+	"github.com/rengas/aruvadai/service"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html"
 	"github.com/golang-migrate/migrate/v4"
@@ -23,35 +26,28 @@ const (
 )
 
 func main() {
-	db := initDatabase()
-	initMigrate(db)
 
-	// Initialize standard Go html template engine
+	//Database migarations
+	initMigrate()
+
 	engine := html.New("./views", ".html")
 
 	app := fiber.New(fiber.Config{
 		Views: engine,
 	})
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		// Render index template
-		return c.Render("index", fiber.Map{
-			"Title": "அறுவடை ...",
-		})
-	})
+	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
+		"password=%s dbname=%s sslmode=disable",
+		host, port, user, password, dbname)
 
-	app.Get("/cart", func(c *fiber.Ctx) error {
-		// Render index template
-		return c.Render("index", fiber.Map{
-			"Title": "அறுவடை ...",
-		})
-	})
+	db, err := sqlx.Connect("postgres", psqlInfo)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
-	app.Get("/order", func(c *fiber.Ctx) error {
-		return c.Render("index", fiber.Map{
-			"Title": "அறுவடை ...",
-		})
-	})
+	a := service.NewAruvadai(db)
+
+	app.Get("/", a.Index)
 
 	log.Fatal(app.Listen(":3000"))
 
@@ -70,7 +66,11 @@ func initDatabase() (db *sql.DB) {
 	return db
 }
 
-func initMigrate(db *sql.DB) {
+func initMigrate() {
+
+	db := initDatabase()
+	defer db.Close()
+
 	driver, err := postgres.WithInstance(db, &postgres.Config{})
 	m, err := migrate.NewWithDatabaseInstance(
 		"file://migrations",
@@ -78,5 +78,8 @@ func initMigrate(db *sql.DB) {
 	if err != nil {
 		panic(err)
 	}
+
+	m.Down()
+
 	m.Up()
 }
