@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 )
 
@@ -15,5 +16,7 @@ func main() {
 		rw.Write([]byte(keys[0]))
 	})
 
+	fmt.Println("server started...")
 	http.ListenAndServe(":8080", nil)
+	fmt.Println("server ending")
 }
