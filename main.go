@@ -5,6 +5,9 @@ import (
 )
 
 func main() {
-	v := "Aruvadai Arambam"
-	fmt.Println(&v)
+	var v string
+	v = "Aruvadai Arambam"
+	fmt.Println(v)
+	k := 0
+	fmt.Println(k)
 }
